@@ -1,0 +1,1119 @@
+[sireesha@sireesha ~]$ su -
+Password: 
+Last login: Sat Aug 27 16:40:05 IST 2022 on pts/0
+[root@sireesha ~]# cd podst
+[root@sireesha post]# cat prg1.sh
+#!/bin/bash
+#The above line tell that this script to use /bin/bash shell
+#This is comment line.This line is ignored
+echo "you are using $SHELL"
+echo "My pwd is $PWD"
+echo "My user is $USER"
+#End of the script
+
+[root@sireesha post]# ./prg1.sh
+you are using /bin/bash
+My pwd is /root/post
+My user is root
+ 
+[root@sireesha post]# cat prg2.sh
+#!/bin/bash
+read -p "Enter your name" name
+echo "Your name is $name"
+read -sp "Enter your secret code:" code
+echo -e "\nyour secret code $code"
+#End of the script
+
+[root@sireesha post]# ./prg2.sh
+Enter your name siri
+Your name is siri
+Enter your secret code:
+your secret code siri
+
+[root@sireesha post]# cat prg3.sh
+#print natural number till the given limit
+#!/bin/bash
+read -p "Enter the upper limit:" n
+echo "Natural numbers are:"
+seq -s " " 1 $n
+#End of the script
+
+[root@sireesha post]# ./prg3.sh
+Enter the uppper limit:5
+Natural numbers are:
+1 2 3 4 5
+
+[root@sireesha post]# cat prg4.sh
+#!/usr/bin/bash
+#This is comment
+echo "The server name is"
+hostname
+echo "The Redhat Release Version is:"
+cat /etc/redhat-release
+#End of the script
+
+[root@sireesha post]#./prg4.sh
+The server name is
+sireesha.alclabs.in
+The Redhat Release Version is:
+Red Hat Enterprise Linux release 8.3 (Ootpa)
+
+[root@sireesha post]# cat prg5.sh
+#!/bin/bash
+echo "Hello world"
+echo "This is my first script"
+#End of the program
+
+[root@sireesha post]# ./prg5.sh
+Hello world
+This is my first script
+
+[root@sireesha post]# cat prg6.sh
+#!/bin/bash
+#Demonstrate sleep statement
+hostname
+sleep 5
+\whoami
+sleep 5
+pwd
+#End of the script
+
+[root@sireesha post]# ./prg6.sh
+sireesha.alclabs.in
+root
+/root/post
+[root@sireesha post]# cat prg7.sh
+#!/bin/bash
+echo "your username is "
+logname
+echo "your user id is "
+id -u
+
+[root@sireesha post]# ./prg7.sh
+your username is 
+sireesha
+your user id is 
+0
+
+[root@sireesha post]# cat prg8.sh
+#!/bin/bash
+#Demonstrating command substitution
+echo "I am `whoami`"
+echo "my login name is `logname`"
+#or you can use below statement
+echo "my login name is $(logname)"
+echo " I am using $(uname) operating system"
+#End of the script
+
+[root@sireesha post]# ./prg8.sh
+I am root
+my login name is sireesha
+my login name is sireesha
+ I am using Linux operating system
+
+[root@sireesha post]# cat prg9.sh
+#!/bin/bash
+#kernel=`uname -r`
+kernel=$(uname -r)
+os=$(uname) #uname is a command and hence use perenthesis
+#user=$USER
+user=${USER} #user is environment variable and hence user curly braces
+#wd=$PWD
+wd=${PWD}
+echo "kernel version is $kernel operating system is $os login name is $user and my pwd is $wd"
+#End of the script
+
+[root@sireesha post]# ./prg9.sh
+kernel version is 4.18.0-240.el8.x86_64 operating system is Linux login name is root and my pwd is /root/post
+
+[root@sireesha post]# cat prg10.sh
+#!/bin/bash
+#Demonstrate user creation using shell script
+read -p "Please enter username:" u1
+useradd $u1 >/dev/null 2>&1 #redirect the output to /dev/null
+echo "Enter the $u1 password:"
+read -s pass
+echo $pass|passwd --stdin $u1>/dev/null 2>&1
+#End of the script
+
+[root@sireesha post]# ./prg10.sh
+Please enter username:tony
+Enter the tony password:
+
+[root@sireesha post]# cat prg11.sh
+#!/bin/bash
+read -p "Enter the first value:" x
+read -p "Enter the second value:" y
+echo "The sum is `expr $x + $y`"
+echo "The subtraction is `expr $x - $y`"
+echo "The multiplication is `expr $x \* $y`"
+echo "The division is `expr $x / $y`"
+echo "The quotient is `expr $x % $y`"
+#End
+
+[root@sireesha post]# ./prg11.sh
+Enter the first value:6
+Enter the second value:3
+The sum is 9
+The subtraction is 3
+The multiplication is 18
+The division is 2
+The quotient is 0
+
+[root@sireesha post]# cat prg12.sh
+#!/bin/bash
+read -p "Enter the first value:" x
+read -p "Enter the second value:" y
+echo "The sum is $(expr $x + $y)"
+echo "The subtraction is $(expr $x - $y)"
+echo "The multiplication is $(expr $x \* $y)"
+echo "The division is $(expr $x / $y)"
+echo "The quotient is $(expr $x % $y)"
+#End
+
+[root@sireesha post]# ./prg12.sh
+Enter the first value:8
+Enter the second value:4
+The sum is 12
+The subtraction is 4
+The multiplication is 32
+The division is 2
+The quotient is 0
+
+[root@sireesha post]# cat prg13.sh
+#!/bin/bash
+#script to perform arithematic operations
+read -p "Enter first value:" num1
+read -p "Enter second value:" num2
+echo "Given numbers are $num1 and $num2"
+res=`expr $num1 + $num2`
+echo "The addition is $res"
+res=`expr $num1 - $num2`
+echo "The subraction is $res"
+res=`expr $num1 \* $num2`
+echo "The multiplication is $res"
+res=`expr $num1 / $num2`
+echo "The integer division is $res"
+res=`expr $num1 % $num2`
+echo "The modulus is $res"
+#End
+
+[root@sireesha post]# ./prg13/.sh
+Enter first value:10
+Enter second value:5
+Given numbers are 10 and 5
+The addition is 15
+The subraction is 5
+The multiplication is 50
+The integer division is 2
+The modulus is 0
+
+[root@sireesha post]# cat prg14.sh
+#!/bin/bash
+#script to perform arithematic operations
+read -p "Enter first value:" num1
+read -p "Enter second value:" num2
+echo "Given numbers are $num1 and $num2"
+res=$[num1+num2]
+echo "The addition is $res"
+res=$[num1-num2]
+echo "The subraction is $res"
+res=$[num1*num2]
+echo "The multiplication is $res"
+res=$[num1/num2]
+echo "The integer division is $res"
+res=$[num1%num2]
+echo "The modulus is $res"
+#End
+
+[root@sireesha post]# ./prg14.sh
+Enter first value:12
+Enter second value:4
+Given numbers are 12 and 4
+The addition is 16
+The subraction is 8
+The multiplication is 48
+The integer division is 3
+The modulus is 0
+
+[root@sireesha post]# cat prg15.sh
+#script to work unary operators
+#!/bin/bash
+echo "you are testing pre and post increment and decrement operators :-)"
+echo "enter a number - value of x: "
+read x #where x is a variable obtained its value from keyboard
+echo "value after post increment of x by executing x++ is $[x++]" #((x++))
+echo "value after pre increment of x by executing ++x is $[++x]" #((++x))
+echo "value after post decrement of x by executing x-- is $[x--]" #((x--))
+echo "value after pre decrement of x by executing --x is $[--x]" #((--x))
+#End
+
+[root@sireesha post]# ./prg15.sh
+you are testing pre and post increment and decrement operators :-)
+enter a number - value of x: 
+5
+value after post increment of x by executing x++ is 5
+value after pre increment of x by executing ++x is 7
+value after post decrement of x by executing x-- is 7
+value after pre decrement of x by executing --x is 5
+
+[root@sireesha post]# cat prg16.sh
+#!/bin/bash
+#Demonstrate the positional parameters
+#
+echo "you entered $# parameters"
+echo "the program name is $0"
+echo "the first parameter is $1"
+#echo "the parameters are $@"
+echo "the parameters are $*"
+#End
+
+[root@sireesha post]# ./prg16.sh this is shell scripting
+you entered 4 parameters
+the program name is ./prg16.sh
+the first parameter is this
+the parameters are this is shell scripting
+
+[root@sireesha post]# cat prg17.sh
+#!/bin/bash
+#Take two numbers from positional parameters
+x=$1
+y=$2
+echo "The sum is `expr $x + $y`"
+echo "The subtraction is `expr $x - $y`"
+echo "The multiplication is `expr $x \* $y`"
+echo "The division is `expr $x / $y`"
+echo "The quotient is `expr $x % $y`"
+#End
+
+[root@sireesha post]# ./prg17.sh 4 3
+The sum is 7
+The subtraction is 1
+The multiplication is 12
+The division is 1
+The quotient is 1
+
+[root@sireesha post]# cat prg18.sh
+#!/bin/bash
+useradd $1
+echo $1|passwd --stdin $1 
+#End
+
+[root@sireesha post]# ./prg18.sh dora
+Changing password for user dora.
+passwd: all authentication tokens updated successfully.
+
+[root@sireesha post]# cat prg19.sh
+#!/bin/bash
+#create empty files given from command line(positional parameters)
+touch $@
+echo "created $# file(s)"
+#end
+
+[root@sireesha post]# ./prg19.sh test1.txt test2.txt
+created 2 file(s)
+
+[root@sireesha post]# cat prg20.sh
+#!/bin/bash
+#Demonstrate arithematic comparisons
+read -p "Enter first number:" num1
+read -p "Enter second number:" num2
+#compare which is big
+#Test if second number is less
+if [ $num1 -gt $num2 ]
+then 
+   echo "$num1 is big"
+fi
+#Test if first number less
+if [ $num1 -lt $num2 ]
+then
+    echo "$num2 is big"
+fi
+#Test if both are equal
+if [ $num1 -eq $num2 ]
+then 
+   echo "Given both the numbers are equal"
+fi
+#End of the script
+
+[root@sireesha post]# ./prg20.sh
+Enter first number:5
+Enter second number:2
+5 is big
+
+[root@sireesha post]# cat prg21.sh
+#!/bin/bash
+#Demonstrate arithematic comparisons
+num1=$1
+num2=$2
+#compare which is big
+#Test if second number is less
+if [ $1 -gt $2 ]
+then 
+   echo "$1 is big"
+fi
+#Test if first number less
+if [ $1 -lt $2 ]
+then
+    echo "$2 is big"
+fi
+#Test if both are equal
+if [ $1 -eq $2 ]
+then 
+   echo "Given both the numbers are equal"
+fi
+#End of the script
+
+[root@sireesha post]# ./prg21.sh 12 13
+13 is big
+
+[root@sireesha post]# cat prg22.sh
+#!/bin/bash
+grep -w ^$1 /etc/passwd
+res=$?
+if [ $res -eq 0 ]
+  then 
+  echo "user $1 exists"
+fi
+
+if [ $res -ne 0 ]
+  then
+   echo "user $1 doesnot exists"
+fi
+#end
+
+[root@sireesha post]# ./prg22.sh max8
+max8:x:5580:7003::/home/max8:/bin/bash
+user max8 exists
+
+[root@sireesha post]# cat prg23.sh
+#!/bin/bash
+grep -w ^$1 /etc/passwd
+res=$?
+if [ $res -eq 0 ]
+  then 
+  echo "user $1 exists"
+else
+   echo "user $1 doesnot exists"
+fi
+#end
+
+[root@sireesha post]# ./prg23.sh max8
+max8:x:5580:7003::/home/max8:/bin/bash
+user max8 exists
+
+[root@sireesha post]# cat prg24.sh
+#!/bin/bash
+#Demonstrate arithematic comparisons
+read -p "Enter first number:" num1
+read -p "Enter second number:" num2
+#compare which is big
+#Test if second number is less
+if [ $num1 -gt $num2 ]
+then 
+   echo "$num1 is big"
+else 
+   echo "$num2 is big"
+fi
+#End of the script
+
+[root@sireesha post]# ./prg24.sh
+Enter first number:7
+Enter second number:9
+9 is big
+
+[root@sireesha post]# cat prg25.sh
+#!/bin/bash
+#Demonstrate arithematic comparisons
+read -p "Enter first number:" num1
+read -p "Enter second number:" num2
+#compare which is big
+#Test if second number is less
+if [ $num1 -gt $num2 ]
+then 
+   echo "$num1 is big"
+elif [ $num1 -lt $num2 ]
+then
+    echo "$num2 is big"
+else
+   echo "Given both the numbers are equal"
+fi
+#End of the script
+
+[root@sireesha post]# ./prg25.sh
+Enter first number:9
+Enter second number:6
+9 is big
+
+[root@sireesha post]# cat prg26.sh
+#!/bin/bash
+if [ $# -eq 1 ]
+then
+ grep -w ^$1 /etc/passwd >/dev/null
+ res=$?
+ if [ $res -eq 0 ]
+ then 
+  echo "user $1 exists"
+ else
+  echo "user $1 doesnot exists"
+  fi #inner if close
+else 
+  echo "Invalid argument"
+  echo "Usage is $0 Arg1"
+fi #outer if 
+#end
+
+[root@sireesha post]# ./prg26.sh max6
+user max6 exists
+
+[root@sireesha post]# ./prg26.sh nothing
+user nothing doesnot exists
+
+[root@sireesha post]# ./prg.26.sh
+Invalid argument
+Usage is ./prg26.sh Arg1
+
+[root@sireesha post]# cat prg27.sh
+#!/bin/bash
+#Take two numbers from positional parameters
+if [ $# -eq 2 ]
+then
+   x=$1
+   y=$2
+else
+   read -p "enter the first value:" x
+   read -p "enter the second value:" y
+fi
+echo "The sum is `expr $x + $y`"
+echo "The subtraction is `expr $x - $y`"
+echo "The multiplication is `expr $x \* $y`"
+echo "The division is `expr $x / $y`"
+echo "The quotient is `expr $x % $y`"
+#End
+
+[root@sireesha post]# ./prg27.sh 
+enter the first value:6
+enter the second value:6
+The sum is 12
+The subtraction is 0
+The multiplication is 36
+The division is 1
+The quotient is 0
+
+[root@sireesha post]# ./prg27.sh 4 3
+The sum is 7
+The subtraction is 1
+The multiplication is 12
+The division is 1
+The quotient is 1
+
+[root@sireesha post]# cat prg28.sh
+#!/bin/bash
+#Demonstrate arithematic comparisons
+read -p "Enter first number:" num1
+read -p "Enter second number:" num2
+#compare which is big
+#Test if second number is less
+if ((num1>num2))
+then 
+   echo "$num1 is big"
+elif ((num1<num2))
+then
+    echo "$num2 is big"
+else
+   echo "Given both the numbers are equal"
+fi
+#End of the script
+
+[root@sireesha post]# ./prg28.sh
+Enter first number:7
+Enter second number:7
+Given both the numbers are equal
+
+[root@sireesha post]# cat prg29.sh
+#!/bin/bash
+#Demonstrate file tests
+#check if filename entered in the command line.Else read it from the keyboard
+if [ $# -ne 1 ]
+then
+  echo "you entered invalid input..provide your input now"
+  read -p "enter the filename(provide absolute path):" fname
+else
+  fname=$1
+fi #if ended here
+#Now do the file tests
+if [ -e $fname ]
+then 
+   echo "Given file exists"
+fi
+if [ -f $fname ]
+then 
+   echo "Its a file"
+fi
+if [ -d $fname ]
+then
+   echo "its a directory"
+fi
+if [ -c $fname ]
+then 
+   echo "its a character special file"
+fi
+if [ -b $fname ]
+then 
+   echo "its a block special file"
+fi
+if [ -w $fname ]
+then 
+   echo "you got write permission on the file"
+fi
+if [ -r $fname ]
+then 
+   echo "you got read permission on the file"
+fi
+if [ -x $fname ]
+then 
+   echo "you got execute permission on the file"
+fi
+if [ -s $fname ]
+then 
+   echo "file size is > 0 bytes"
+fi
+if [ -k $fname ]
+then 
+   echo "your file having sticky bit"
+fi
+
+[root@sireesha post]# ./prg29.sh /root/post/testone.txt
+Given file exists
+Its a file
+you got write permission on the file
+you got read permission on the file
+file size is > 0 bytes
+
+[root@sireesha post]# cat prg30.sh
+#!/bin/bash
+#Demonstrate case statement in shell script
+read -p "Enter your name:" name
+#case begins
+case $name in
+kavya)
+     echo "Hi kavya"
+     ;;
+gopal)
+     echo "hi Gopal"
+     ;;
+priyanka)
+     echo "Hi priyanka"
+     ;;
+sireesha)
+     echo "hi sireesha"
+     ;;
+*)
+    echo "Hello..you are not kavya or gopal or priyanka or sireesha"
+    ;;
+esac
+#End of the case statement
+#end 
+
+[root@sireesha post]# ./prg30.sh
+Enter your name:siri
+Hello..you are not kavya or gopal or priyanka or sireesha
+
+[root@sireesha post]# cat prg31.sh
+#!/bin/bash
+
+echo "Enter your name:"
+read name
+case $name in
+Sanjeevi|SANJEEVI|sanjeevi)
+                          echo "Entered was $name"
+                          ;;
+*)
+                          echo "In the default option...Entered was $name"
+                          ;;
+esac
+#end of case
+
+[root@sireesha post]# ./prg31.sh
+Enter your name:
+sanjeevi
+Entered was sanjeevi
+
+[root@sireesha post]# cat prg32.sh
+#!/bin/bash
+#Demonstrate functions in shell scripting
+#Define the function before you call it.you can call the function with its name.
+function printme()
+{
+ echo "Hello Kudlu!!"
+}
+#End of the function
+#Main program starts here
+echo "calling the function for 1st time"
+printme
+echo "calling the function for 2nd time"
+printme
+echo "calling the function for 3rd time"
+printme
+#Main program ends here
+
+[root@sireesha post]# ./prg32.sh
+calling the function for 1st time
+Hello Kudlu!!
+calling the function for 2nd time
+Hello Kudlu!!
+calling the function for 3rd time
+Hello Kudlu!!
+
+[root@sireesha post]# cat prg33.sh
+#!/bin/bash
+#implement functiond and demonstrate positional parameters within the function
+function sayhelo()
+{
+ echo "Helo $1"
+}
+
+#Main
+sayhelo rishi
+sayhelo sai
+#End
+
+[root@sireesha post]# ./prg33.sh
+Helo rishi
+Helo sai
+
+[root@sireesha post]# cat prg34.sh
+#!/bin/bash
+#Demonstrate Arithematic operations
+function add()
+{
+ res=`expr $1 + $2`
+ echo $res
+}
+function sub()
+{
+ res=`expr $1 - $2`
+ echo $res
+}
+function mul()
+{
+ res=`expr $1 \* $2`
+ echo $res
+}
+function div()
+{
+ res=`echo "scale=2;$1/$2" |bc`
+ echo $res
+}
+function modulus()
+{
+ res=`expr $1 % $2`
+ echo $res
+}
+#Main scirpt
+#check if inputs are provided through command line.Else read them from keyboard
+if [ $# -eq 2 ]
+then
+ num1=$1
+ num2=$2
+else
+ read -p "Enter the first number:" num1
+ read -p "Enter the second number:" num2
+fi #if ends
+echo "Adiition is:"
+add $num1 $num2
+echo "subtraction is:"
+sub $num1 $num2
+echo "Multiplication is :"
+mul $num1 $num2
+echo "Division is:"
+div $num1 $num2
+#end
+
+[root@sireesha post]# ./perg34.sh
+Enter the first number:6
+Enter the second number:9
+Adiition is:
+15
+subtraction is:
+-3
+Multiplication is :
+54
+Division is:
+.66
+
+[root@sireesha post]# ./prg34.sh 6 9
+Adiition is:
+15
+subtraction is:
+-3
+Multiplication is :
+54
+Division is:
+.66
+
+[root@sireesha post]# cat prg35.sh
+#!/bin/bash
+#Demonstrate if the given user locked or not using function
+function check()
+{
+ grep $1 /etc/shadow | cut -f2 -d: | grep ^'!' >/dev/null
+ return $? #return 0 or 1
+}
+#Main script start
+if [ $# -eq 1 ]
+then 
+   u1=$1
+else
+   read -p "Enter username to check if its is locked or not:" u1
+fi
+check $u1
+if [ $? -eq 0 ]
+then
+   echo "$u1 is locked"
+else 
+   echo "$u1 is not locked"
+fi
+#end of main script
+
+[root@sireesha post]# ./prg35.sh max8
+max8 is locked
+
+[root@sireesha post]# cat prg36.sh
+#!/bin/bash
+#Demonstarting for iterative statement
+for val in mon tue wed thu fri
+do 
+  echo "Hi $val"
+done
+#end
+
+[root@sireesha post]# ./prg36.sh
+Hi mon
+Hi tue
+Hi wed
+Hi thu
+Hi fri
+
+[root@sireesha post]# cat prg37.sh
+#!/bin/bash
+for i in `seq 1 10`
+do 
+  echo $i
+done
+
+[root@sireesha post]# ./prg37.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+[root@sireesha post]# cat prg38.sh
+#!/bin/bash
+#count number of regular files in the current directory
+c=0 #make count to zero
+for i in `ls`
+do
+ if [ -f $i ]
+ then
+    ((c++))
+ fi
+done
+echo "There are $c files found in your current working directory $PWD"
+#end
+
+[root@sireesha post]# ./prg38.sh
+There are 55 files found in your current working directory /root/post
+
+[root@sireesha post]# cat prg39.sh
+#!/bin/bash
+#create users from the given file
+#the filename is one.txt in the current dir
+function adduser()
+{
+ for i in `cat one.txt`
+ do
+   useradd $i >/dev/null 2>&1
+   echo $i|passwd --stdin $i >/dev/null 2>&1
+   chage -d0 $i
+ done
+}
+#main program starts here
+if [ -f one.txt ]
+then
+  adduser
+else
+  echo "The file one.txt doesnt exists..unable to process..."
+fi
+#End of the program 
+
+[root@sireesha post]# ./prg39.sh
+
+[root@sireesha post]# cat prg40.sh
+#!/bin/bash
+#c style for loop
+n=5
+for ((i=0;i<=n;i++))
+do
+  echo $i
+done
+#end
+
+[root@sireesha post]# ./prg40.sh
+0
+1
+2
+3
+4
+5
+
+[root@sireesha post]# cat prg41.sh
+#!/bin/bash
+#Demonstrate while loop
+n=0
+while [ $n -le 10 ]
+do 
+  echo $n
+  ((n++))
+done
+#End
+
+[root@sireesha post]# ./prg41.sh
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+[root@sireesha post]# cat prg42.sh
+#!/bin/bash
+#while [ 1 ]
+#while :
+while true
+do 
+  echo "Enter a value:"
+  read v
+  echo "your luck number is $v"
+  if [ $v -eq 0 ]
+  then
+    break #break the loop
+  fi
+done
+
+[root@sireesha post]# ./prg42.sh
+Enter a value:
+4
+your luck number is 4
+Enter a value:
+6
+your luck number is 6
+Enter a value:
+^C
+
+[root@sireesha post]# cat prg43.sh
+#!/bin/bash
+#Read variable till you hit enter key is blank variable
+v=1
+while [ -n "$v" ]
+do
+   echo "Enter the text.End with Enter key.."
+   read v
+        echo "you entered: $v"
+done
+
+[root@sireesha post]# ./prg43.sh
+Enter the text.End with Enter key..
+4
+you entered: 4
+Enter the text.End with Enter key..
+4
+you entered: 4
+Enter the text.End with Enter key..
+5
+you entered: 5
+Enter the text.End with Enter key..
+
+you entered: 
+
+[root@sireesha post]# cat prg44.sh
+#!/bin/bash
+#Read the file.Take the file name from command line.
+if [ $# -ne 0 ]
+then
+  if [ -e $1 -a -f $1 ]
+  then
+     exec < $1
+     while read line
+     do
+      echo $line
+     done
+   else
+    echo "The given $1 doent exists or its not a file to read"
+   fi
+else
+echo "you have not entered file name.Usage is $0 /path/toFile"
+echo "Try Again..."
+fi
+#End
+
+[root@sireesha post]# ./prg44.sh one.txt
+manoj
+murali
+madhu
+kushal
+anil
+anuradha
+
+[root@sireesha post]# ./prg44.sh ten.txt
+The given ten.txt doent exists or its not a file to read
+
+[root@sireesha post]# cat prg45.sh
+#!/bin/bash
+#Demonstrate until lopp
+#till condition becomes true,the loop will be execute.
+count=0
+until [ $count -gt 10 ]
+do
+  echo $count
+  ((count ++))
+done
+
+[root@sireesha post]# ./prg45.sh
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+[root@sireesha post]# cat prg46.sh
+#!/bin/bash
+#Demonstrate select loop
+select pro in engineer teacher doctor police lawyer theif
+do
+  echo "you choose $pro profession"
+done
+#end
+
+[root@sireesha post]# ./prg46.sh
+1) engineer
+2) teacher
+3) doctor
+4) police
+5) lawyer
+6) theif
+#? 1
+you choose engineer profession
+#? 5
+you choose lawyer profession
+#? 0
+you choose  profession
+#? 7
+you choose  profession
+#? ^C
+
+[root@sireesha post]# cat prg47.sh
+#!/bin/bash
+#script to perform arithematic operations
+echo "Enter var1 and var2:"
+read v1;read v2
+opt=""
+select opt in + - \* exit
+do
+#echo "you selected $opt"
+ case $opt in
+  +) echo `echo $v1 + $v2|bc` ;;
+  -) echo `echo $v1 - $v2|bc` ;;
+  \*) echo `echo $v1 \* $v2|bc` ;;
+  exit) break ;;
+  *) echo "$opt is invalid operator.."
+ esac #case end
+done #loop end
+
+[root@sireesha post]# ./prg47.sh
+Enter var1 and var2:
+10
+20
+1) +
+2) -
+3) *
+4) exit
+#? +
+ is invalid operator..
+#? 1
+30
+#? ^C
+
+[root@sireesha post]# cat prg48.sh
+#!/bin/bash
+#Demonstrating arrays in bash shell
+declare -a a
+a=(police student lawyer doctor engineer)
+#print array values
+#print the first value
+echo "The first value of the array:"
+echo ${a[0]}
+echo "The fifth value of the array:"
+#echo the fifth value
+echo ${a[4]}
+#To print all the values
+echo "The array is:"
+echo ${a[@]}
+#echo ${a[*]} #same as above line
+#print number of values in the array
+echo "The number of values in the array is:"
+echo ${#a[@]}
+#echo ${#a[*]}
+#End
+ #print array elements with for loop
+for i in `echo ${a[@]}`
+do 
+  echo $i
+done
+#print array elements in c style for loop
+n=${#a[@]}
+for ((i=0;i<n;i++))
+do
+ echo ${a[$i]}
+done
+#End 
+
+[root@sireesha post]# ./prg48.sh
+The first value of the array:
+police
+The fifth value of the array:
+engineer
+The array is:
+police student lawyer doctor engineer
+The number of values in the array is:
+5
+police
+student
+lawyer
+doctor
+engineer
+police
+student
+lawyer
+doctor
+engineer
+[root@sireesha post]# exit
+logout
+
